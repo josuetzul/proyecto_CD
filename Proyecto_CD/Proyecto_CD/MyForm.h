@@ -8,6 +8,7 @@ namespace ProyectoCD {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -34,12 +35,38 @@ namespace ProyectoCD {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::TabControl^ tabControl1;
+	protected:
+	private: System::Windows::Forms::TabPage^ tabPage1;
+	private: System::Windows::Forms::TabPage^ tabPage2;
+	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+
+	private: System::Windows::Forms::Button^ Cargar_BTN;
+
+	private: System::Windows::Forms::FolderBrowserDialog^ folderBrowserDialog1;
+	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ Nombre_CD;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Canciones_Totales;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Nombre_cncn;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Artista;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Duracion;
+
+
+
+
+
+
+
+
+
+
 
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -48,12 +75,181 @@ namespace ProyectoCD {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"MyForm";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
+			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->Cargar_BTN = (gcnew System::Windows::Forms::Button());
+			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->Nombre_CD = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->Canciones_Totales = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Nombre_cncn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Artista = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Duracion = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->tabControl1->SuspendLayout();
+			this->tabPage1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->SuspendLayout();
+			// 
+			// tabControl1
+			// 
+			this->tabControl1->Controls->Add(this->tabPage1);
+			this->tabControl1->Controls->Add(this->tabPage2);
+			this->tabControl1->Location = System::Drawing::Point(13, 13);
+			this->tabControl1->Name = L"tabControl1";
+			this->tabControl1->SelectedIndex = 0;
+			this->tabControl1->Size = System::Drawing::Size(790, 590);
+			this->tabControl1->TabIndex = 0;
+			// 
+			// tabPage1
+			// 
+			this->tabPage1->Controls->Add(this->dataGridView1);
+			this->tabPage1->Controls->Add(this->richTextBox1);
+			this->tabPage1->Location = System::Drawing::Point(4, 25);
+			this->tabPage1->Name = L"tabPage1";
+			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage1->Size = System::Drawing::Size(782, 561);
+			this->tabPage1->TabIndex = 0;
+			this->tabPage1->Text = L"tabPage1";
+			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->AllowUserToAddRows = false;
+			this->dataGridView1->AllowUserToOrderColumns = true;
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
+				this->Nombre_CD,
+					this->Canciones_Totales, this->Nombre_cncn, this->Artista, this->Duracion
+			});
+			this->dataGridView1->Location = System::Drawing::Point(7, 7);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersWidth = 51;
+			this->dataGridView1->RowTemplate->Height = 24;
+			this->dataGridView1->Size = System::Drawing::Size(769, 548);
+			this->dataGridView1->TabIndex = 1;
+			// 
+			// richTextBox1
+			// 
+			this->richTextBox1->Location = System::Drawing::Point(7, 7);
+			this->richTextBox1->Name = L"richTextBox1";
+			this->richTextBox1->Size = System::Drawing::Size(769, 548);
+			this->richTextBox1->TabIndex = 0;
+			this->richTextBox1->Text = L"";
+			// 
+			// tabPage2
+			// 
+			this->tabPage2->Location = System::Drawing::Point(4, 25);
+			this->tabPage2->Name = L"tabPage2";
+			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage2->Size = System::Drawing::Size(782, 561);
+			this->tabPage2->TabIndex = 1;
+			this->tabPage2->Text = L"tabPage2";
+			this->tabPage2->UseVisualStyleBackColor = true;
+			// 
+			// Cargar_BTN
+			// 
+			this->Cargar_BTN->Location = System::Drawing::Point(308, 621);
+			this->Cargar_BTN->Name = L"Cargar_BTN";
+			this->Cargar_BTN->Size = System::Drawing::Size(169, 68);
+			this->Cargar_BTN->TabIndex = 1;
+			this->Cargar_BTN->Text = L"CARGAR";
+			this->Cargar_BTN->UseVisualStyleBackColor = true;
+			this->Cargar_BTN->Click += gcnew System::EventHandler(this, &MyForm::Cargar_BTN_Click);
+			// 
+			// folderBrowserDialog1
+			// 
+			this->folderBrowserDialog1->Description = L"Seleccione el directorio";
+			this->folderBrowserDialog1->ShowNewFolderButton = false;
+			this->folderBrowserDialog1->HelpRequest += gcnew System::EventHandler(this, &MyForm::folderBrowserDialog1_HelpRequest);
+			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->DefaultExt = L"\"rtf\"";
+			this->openFileDialog1->FileName = L"openFileDialog1";
+			this->openFileDialog1->Filter = L"\"rtf files (*.rtf)|*.rtf\"";
+			// 
+			// Nombre_CD
+			// 
+			this->Nombre_CD->HeaderText = L"Nombre CD";
+			this->Nombre_CD->MinimumWidth = 6;
+			this->Nombre_CD->Name = L"Nombre_CD";
+			this->Nombre_CD->Width = 175;
+			// 
+			// Canciones_Totales
+			// 
+			this->Canciones_Totales->HeaderText = L"Canciones Totales";
+			this->Canciones_Totales->MinimumWidth = 6;
+			this->Canciones_Totales->Name = L"Canciones_Totales";
+			// 
+			// Nombre_cncn
+			// 
+			this->Nombre_cncn->HeaderText = L"Nombre";
+			this->Nombre_cncn->MinimumWidth = 6;
+			this->Nombre_cncn->Name = L"Nombre_cncn";
+			this->Nombre_cncn->Width = 150;
+			// 
+			// Artista
+			// 
+			this->Artista->HeaderText = L"Artista";
+			this->Artista->MinimumWidth = 6;
+			this->Artista->Name = L"Artista";
+			this->Artista->Width = 150;
+			// 
+			// Duracion
+			// 
+			this->Duracion->HeaderText = L"Duracion";
+			this->Duracion->MinimumWidth = 6;
+			this->Duracion->Name = L"Duracion";
+			this->Duracion->Width = 150;
+			// 
+			// MyForm
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(815, 710);
+			this->Controls->Add(this->Cargar_BTN);
+			this->Controls->Add(this->tabControl1);
+			this->Name = L"MyForm";
+			this->Text = L"MyForm";
+			this->tabControl1->ResumeLayout(false);
+			this->tabPage1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			this->ResumeLayout(false);
+
 		}
 #pragma endregion
+	private: System::Void Cargar_BTN_Click(System::Object^ sender, System::EventArgs^ e) {
+		System::Windows::Forms::DialogResult result = folderBrowserDialog1->ShowDialog();
+
+		if (result == System::Windows::Forms::DialogResult::OK)
+		{
+			String^ folderName = folderBrowserDialog1->SelectedPath;
+			openFileDialog1->InitialDirectory = folderName;
+			// Obtener todos los archivos de texto en la carpeta seleccionada
+			array<String^>^ archivos = Directory::GetFiles(folderName, "*.txt");
+
+			String^ Linea = "";
+			int contador = 0;
+			int contador_canciones = 0;
+			for each (String ^ archivo in archivos) {
+			StreamReader^ sr = gcnew StreamReader(archivo);
+				dataGridView1->Rows->Add(1);
+				while ((Linea = sr->ReadLine()) != nullptr) {
+					contador_canciones++;
+				}
+				dataGridView1->Rows[contador]->Cells[0]->Value = Path::GetFileName(archivo);
+				dataGridView1->Rows[contador]->Cells[1]->Value = contador_canciones;
+
+			}
+			
+		}
+		
+		
+	};
+	private: System::Void folderBrowserDialog1_HelpRequest(System::Object^ sender, System::EventArgs^ e) {
+	}
 	};
 }

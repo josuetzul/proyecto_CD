@@ -1,1 +1,3 @@
 C:\Users\elbro\OneDrive\Escritorio\Tareas U\1 año\2do ciclo\progra 2\TS\Proyecto_CD\proyecto_CD\Proyecto_CD\x64\Debug\Proyecto_CD.vcxproj.AssemblyReference.cache
+C:\Users\elbro\OneDrive\Escritorio\Tareas U\1 año\2do ciclo\progra 2\TS\Proyecto_CD\proyecto_CD\Proyecto_CD\x64\Debug\ProyectoCD.MyForm.resources
+C:\Users\elbro\OneDrive\Escritorio\Tareas U\1 año\2do ciclo\progra 2\TS\Proyecto_CD\proyecto_CD\Proyecto_CD\x64\Debug\Proyecto_CD.vcxproj.GenerateResource.cache
