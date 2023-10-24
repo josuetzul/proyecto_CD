@@ -1,9 +1,14 @@
 #include "pch.h"
+#include "MyForm.h"
 
 using namespace System;
+using namespace System::Windows::Forms;
 
-int main(array<System::String ^> ^args)
-{
-    Console::WriteLine("Hola mundo de git");
-    return 0;
+
+[STAThreadAttribute]
+void main(array <String^>^ args) {
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+	ProyectoCD::MyForm form;
+	Application::Run(% form);
 }
