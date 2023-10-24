@@ -1,0 +1,6 @@
+﻿  MyForm.cpp
+C:\Users\elbro\OneDrive\Escritorio\Tareas U\1 año\2do ciclo\progra 2\TS\Proyecto_CD\proyecto_CD\Proyecto_CD\MyForm.cpp(6,1): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+  Generando código...
+  MyForm.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
+  Proyecto_CD.vcxproj -> C:\Users\elbro\OneDrive\Escritorio\Tareas U\1 año\2do ciclo\progra 2\TS\Proyecto_CD\proyecto_CD\x64\Debug\Proyecto_CD.exe
