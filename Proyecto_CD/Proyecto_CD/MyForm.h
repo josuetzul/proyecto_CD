@@ -11,6 +11,7 @@ namespace ProyectoCD {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::IO;
+	using namespace cliext;
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -47,13 +48,15 @@ namespace ProyectoCD {
 
 	private: System::Windows::Forms::FolderBrowserDialog^ folderBrowserDialog1;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewButtonColumn^ Nombre_CD;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Canciones_Totales;
-	private: System::Windows::Forms::DataGridViewCheckBoxColumn^ Check;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Nombre_cncn;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Artista;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Duracion;
+	public: System::Windows::Forms::DataGridView^ dataGridView1;
+	private:
+
+
+
+
+
+
+
 	private: System::Windows::Forms::Button^ Agregar_BTN;
 	private: System::Windows::Forms::Button^ Reproduccion_BTN;
 
@@ -96,11 +99,45 @@ namespace ProyectoCD {
 
 
 
+
+
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
 		System::ComponentModel::Container^ components;
+
+
+
+		   cliext::queue<String^>^ cola = gcnew cliext::queue<String^>();
+		   cliext::queue<String^>^ cola_art = gcnew cliext::queue<String^>();
+
+
+
+
+
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Artista;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Cancion;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Duracion;
+private: System::Windows::Forms::DataGridViewButtonColumn^ Nombre_CD;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ Canciones_Totales;
+private: System::Windows::Forms::DataGridViewCheckBoxColumn^ Check;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ Nombre_cncn;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ Nombre_artista;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ Duracion2;
+
+
+
+
+
+
+
+
+
+		   cliext::queue<String^>^ cola_dur = gcnew cliext::queue<String^>();
+
+		   
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -117,8 +154,8 @@ namespace ProyectoCD {
 			this->Canciones_Totales = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Check = (gcnew System::Windows::Forms::DataGridViewCheckBoxColumn());
 			this->Nombre_cncn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Artista = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Duracion = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Nombre_artista = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Duracion2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->opciones_ORDEN = (gcnew System::Windows::Forms::ComboBox());
@@ -126,6 +163,9 @@ namespace ProyectoCD {
 			this->Siguiente_BTN = (gcnew System::Windows::Forms::Button());
 			this->Reproduccion_BTN = (gcnew System::Windows::Forms::Button());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->Artista = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Cancion = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Duracion = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Cargar_BTN = (gcnew System::Windows::Forms::Button());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -143,7 +183,7 @@ namespace ProyectoCD {
 			// 
 			Label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			Label1->Location = System::Drawing::Point(59, 299);
+			Label1->Location = System::Drawing::Point(51, 252);
 			Label1->Name = L"Label1";
 			Label1->Size = System::Drawing::Size(222, 57);
 			Label1->TabIndex = 5;
@@ -157,7 +197,7 @@ namespace ProyectoCD {
 			this->tabControl1->Location = System::Drawing::Point(13, 13);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(825, 602);
+			this->tabControl1->Size = System::Drawing::Size(825, 520);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
@@ -167,7 +207,7 @@ namespace ProyectoCD {
 			this->tabPage1->Location = System::Drawing::Point(4, 25);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(817, 573);
+			this->tabPage1->Size = System::Drawing::Size(817, 491);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"tabPage1";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -179,13 +219,13 @@ namespace ProyectoCD {
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
 				this->Nombre_CD,
-					this->Canciones_Totales, this->Check, this->Nombre_cncn, this->Artista, this->Duracion
+					this->Canciones_Totales, this->Check, this->Nombre_cncn, this->Nombre_artista, this->Duracion2
 			});
 			this->dataGridView1->Location = System::Drawing::Point(7, 7);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(804, 545);
+			this->dataGridView1->Size = System::Drawing::Size(804, 478);
 			this->dataGridView1->TabIndex = 1;
 			this->dataGridView1->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellClick);
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
@@ -218,25 +258,25 @@ namespace ProyectoCD {
 			this->Nombre_cncn->Name = L"Nombre_cncn";
 			this->Nombre_cncn->Width = 150;
 			// 
-			// Artista
+			// Nombre_artista
 			// 
-			this->Artista->HeaderText = L"Artista";
-			this->Artista->MinimumWidth = 6;
-			this->Artista->Name = L"Artista";
-			this->Artista->Width = 150;
+			this->Nombre_artista->HeaderText = L"Artista";
+			this->Nombre_artista->MinimumWidth = 6;
+			this->Nombre_artista->Name = L"Nombre_artista";
+			this->Nombre_artista->Width = 150;
 			// 
-			// Duracion
+			// Duracion2
 			// 
-			this->Duracion->HeaderText = L"Duracion";
-			this->Duracion->MinimumWidth = 6;
-			this->Duracion->Name = L"Duracion";
-			this->Duracion->Width = 75;
+			this->Duracion2->HeaderText = L"Duracion";
+			this->Duracion2->MinimumWidth = 6;
+			this->Duracion2->Name = L"Duracion2";
+			this->Duracion2->Width = 75;
 			// 
 			// richTextBox1
 			// 
 			this->richTextBox1->Location = System::Drawing::Point(7, 7);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(804, 560);
+			this->richTextBox1->Size = System::Drawing::Size(804, 478);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = L"";
 			// 
@@ -251,7 +291,7 @@ namespace ProyectoCD {
 			this->tabPage2->Location = System::Drawing::Point(4, 25);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(817, 573);
+			this->tabPage2->Size = System::Drawing::Size(817, 491);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"tabPage2";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -259,52 +299,83 @@ namespace ProyectoCD {
 			// opciones_ORDEN
 			// 
 			this->opciones_ORDEN->FormattingEnabled = true;
-			this->opciones_ORDEN->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Nombre cancion", L"Artista", L"Duracion" });
-			this->opciones_ORDEN->Location = System::Drawing::Point(62, 368);
+			this->opciones_ORDEN->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Artista", L"Cancion", L"Duracion" });
+			this->opciones_ORDEN->Location = System::Drawing::Point(56, 312);
 			this->opciones_ORDEN->Name = L"opciones_ORDEN";
 			this->opciones_ORDEN->Size = System::Drawing::Size(225, 24);
 			this->opciones_ORDEN->TabIndex = 4;
 			// 
 			// Ordenar_BTN
 			// 
-			this->Ordenar_BTN->Location = System::Drawing::Point(62, 398);
+			this->Ordenar_BTN->Location = System::Drawing::Point(56, 342);
 			this->Ordenar_BTN->Name = L"Ordenar_BTN";
 			this->Ordenar_BTN->Size = System::Drawing::Size(225, 90);
 			this->Ordenar_BTN->TabIndex = 3;
 			this->Ordenar_BTN->Text = L"ORDENAR";
 			this->Ordenar_BTN->UseVisualStyleBackColor = true;
+			this->Ordenar_BTN->Click += gcnew System::EventHandler(this, &MyForm::Ordenar_BTN_Click);
 			// 
 			// Siguiente_BTN
 			// 
-			this->Siguiente_BTN->Location = System::Drawing::Point(62, 136);
+			this->Siguiente_BTN->Location = System::Drawing::Point(56, 136);
 			this->Siguiente_BTN->Name = L"Siguiente_BTN";
 			this->Siguiente_BTN->Size = System::Drawing::Size(225, 92);
 			this->Siguiente_BTN->TabIndex = 2;
 			this->Siguiente_BTN->Text = L"REPRODUCIR SIGUIENTE";
 			this->Siguiente_BTN->UseVisualStyleBackColor = true;
+			this->Siguiente_BTN->Click += gcnew System::EventHandler(this, &MyForm::Siguiente_BTN_Click);
 			// 
 			// Reproduccion_BTN
 			// 
-			this->Reproduccion_BTN->Location = System::Drawing::Point(62, 25);
+			this->Reproduccion_BTN->Location = System::Drawing::Point(56, 29);
 			this->Reproduccion_BTN->Name = L"Reproduccion_BTN";
 			this->Reproduccion_BTN->Size = System::Drawing::Size(225, 89);
 			this->Reproduccion_BTN->TabIndex = 1;
 			this->Reproduccion_BTN->Text = L"REPRODUCCION ACTUAL";
 			this->Reproduccion_BTN->UseVisualStyleBackColor = true;
+			this->Reproduccion_BTN->Click += gcnew System::EventHandler(this, &MyForm::Reproduccion_BTN_Click);
 			// 
 			// dataGridView2
 			// 
+			this->dataGridView2->AllowUserToAddRows = false;
+			this->dataGridView2->AllowUserToOrderColumns = true;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2->Location = System::Drawing::Point(409, 6);
+			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+				this->Artista,
+					this->Cancion, this->Duracion
+			});
+			this->dataGridView2->Location = System::Drawing::Point(383, 6);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->RowHeadersWidth = 51;
 			this->dataGridView2->RowTemplate->Height = 24;
-			this->dataGridView2->Size = System::Drawing::Size(402, 561);
+			this->dataGridView2->Size = System::Drawing::Size(428, 479);
 			this->dataGridView2->TabIndex = 0;
+			this->dataGridView2->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView2_CellContentClick);
+			// 
+			// Artista
+			// 
+			this->Artista->HeaderText = L"Artista";
+			this->Artista->MinimumWidth = 6;
+			this->Artista->Name = L"Artista";
+			this->Artista->Width = 125;
+			// 
+			// Cancion
+			// 
+			this->Cancion->HeaderText = L"Cancion";
+			this->Cancion->MinimumWidth = 6;
+			this->Cancion->Name = L"Cancion";
+			this->Cancion->Width = 125;
+			// 
+			// Duracion
+			// 
+			this->Duracion->HeaderText = L"Duracion";
+			this->Duracion->MinimumWidth = 6;
+			this->Duracion->Name = L"Duracion";
+			this->Duracion->Width = 125;
 			// 
 			// Cargar_BTN
 			// 
-			this->Cargar_BTN->Location = System::Drawing::Point(55, 621);
+			this->Cargar_BTN->Location = System::Drawing::Point(58, 550);
 			this->Cargar_BTN->Name = L"Cargar_BTN";
 			this->Cargar_BTN->Size = System::Drawing::Size(169, 68);
 			this->Cargar_BTN->TabIndex = 1;
@@ -326,7 +397,7 @@ namespace ProyectoCD {
 			// 
 			// Agregar_BTN
 			// 
-			this->Agregar_BTN->Location = System::Drawing::Point(288, 621);
+			this->Agregar_BTN->Location = System::Drawing::Point(301, 550);
 			this->Agregar_BTN->Name = L"Agregar_BTN";
 			this->Agregar_BTN->Size = System::Drawing::Size(206, 68);
 			this->Agregar_BTN->TabIndex = 2;
@@ -336,18 +407,18 @@ namespace ProyectoCD {
 			// 
 			// Ver_Cola
 			// 
-			this->Ver_Cola->Location = System::Drawing::Point(579, 621);
+			this->Ver_Cola->Location = System::Drawing::Point(574, 550);
 			this->Ver_Cola->Name = L"Ver_Cola";
 			this->Ver_Cola->Size = System::Drawing::Size(227, 68);
 			this->Ver_Cola->TabIndex = 1;
 			this->Ver_Cola->Text = L"VER COLA DE REPRODUCCION";
 			this->Ver_Cola->UseVisualStyleBackColor = true;
+			this->Ver_Cola->Click += gcnew System::EventHandler(this, &MyForm::Ver_Cola_Click);
 			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(856, 710);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
+			this->ClientSize = System::Drawing::Size(846, 631);
 			this->Controls->Add(this->Ver_Cola);
 			this->Controls->Add(this->Agregar_BTN);
 			this->Controls->Add(this->Cargar_BTN);
@@ -372,7 +443,6 @@ namespace ProyectoCD {
 		{
 			String^ folderName = folderBrowserDialog1->SelectedPath;
 			openFileDialog1->InitialDirectory = folderName;
-			// Obtener todos los archivos de texto en la carpeta seleccionada
 			array<String^>^ archivos = Directory::GetFiles(folderName, "*.txt");
 			StreamReader^ sr;
 
@@ -430,32 +500,146 @@ namespace ProyectoCD {
 		}
 		sr->Close();
 	}
-	
+	public: System::Void eliminarfilas(int n1) {
+		for (int i = dataGridView1->RowCount - 1; i >= n1; i--) {
+			dataGridView1->Rows->RemoveAt(i);
+		}
+	}
 	private: System::Void folderBrowserDialog1_HelpRequest(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, DataGridViewCellEventArgs^ e) {
 		
 			String^ nombreColumna = dataGridView1->Columns[e->ColumnIndex]->Name;
+			int n1_canciones;
 
-			// Verificar si la celda pertenece a la columna "album"
 			if (nombreColumna == "Nombre_CD") {
-				// Obtener el valor de la celda (nombre del álbum)
-				String^ nombreAlbum = dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value->ToString();
+				String^ nombreAlbum = dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+				String^ n_canciones = dataGridView1->Rows[e->RowIndex]->Cells[1]->Value->ToString();
+				n1_canciones = Convert::ToInt32(n_canciones);
 
-				// Ejecutar la acción específica para la columna "album"
-				// Puedes agregar aquí la lógica que deseas realizar con el álbum seleccionado
 				MessageBox::Show("Se hizo clic en el álbum: " + nombreAlbum, "Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				mostrarAlbum(nombreAlbum);
+				for each (DataGridViewRow ^ row in dataGridView1->Rows) {
+					DataGridViewCheckBoxCell^ checkBoxCell = dynamic_cast<DataGridViewCheckBoxCell^>(row->Cells[2]);
+					if (checkBoxCell != nullptr) {
+						checkBoxCell->Value = false;
+					}
+				}
+				eliminarfilas(n1_canciones);
 			}
 	}
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
+		   String^ artista;
+		   String^ cancion;
+		   String^ duracion;
+	private: System::Void OnCellClick(System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		//String^ nombreColumna = dataGridView1->Columns[e->ColumnIndex]->Name;
+
+		//// Verificar si la celda pertenece a la columna "album"
+		//if (nombreColumna == "Check") {
+		//	String^ cancion = dataGridView1->Rows[e->RowIndex]->Cells[(e->ColumnIndex) +1]->Value->ToString();
+		//	MessageBox::Show("presionó la cancion " + cancion);
+		//}
+	}
 	private: System::Void Agregar_BTN_Click(System::Object^ sender, System::EventArgs^ e) {
-		cliext::queue<String^>^ cola = gcnew cliext::queue<String^>();
+		for (int i = 0; i < dataGridView1->RowCount; i++) {
+			DataGridViewCheckBoxCell^ checkBoxCell = dynamic_cast<DataGridViewCheckBoxCell^>(dataGridView1->Rows[i]->Cells[2]);
+			bool isChecked = Convert::ToBoolean(checkBoxCell->Value);
+
+			if (isChecked) {
+				String^ cancion = dynamic_cast<String^>(dataGridView1->Rows[i]->Cells[3]->Value);
+				String^ artista = dynamic_cast<String^>(dataGridView1->Rows[i]->Cells[4]->Value);
+				String^ duracion = dynamic_cast<String^>(dataGridView1->Rows[i]->Cells[5]->Value);
+
+				cola->push(cancion);
+				cola_art->push(artista);
+				cola_dur->push(duracion);
+			}
+		}
 	}
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		int fila = e->RowIndex;
-		
+		/*bool isChecked = false;
+		if (e->ColumnIndex == 2)
+		{
+			String^ cancion = dataGridView1->Rows[e->RowIndex]->Cells[3]->Value->ToString();
+			bool isChecked = (bool)dataGridView1->Rows[e->RowIndex]->Cells[2]->Value;
+
+			if (isChecked)
+			{
+				cola->push(cancion);
+			}
+			else;
+		}*/
 	}
+private: System::Void Ver_Cola_Click(System::Object^ sender, System::EventArgs^ e) {
+	tabControl1->SelectTab(tabPage2);
+
+	while (!cola->empty()) {
+		String^ cancion = cola->front();
+		String^ artista = cola_art->front();
+		String^ duracion = cola_dur->front();
+		cola->pop();
+		cola_art->pop();
+		cola_dur->pop();
+		dataGridView2->Rows->Add(artista, cancion, duracion);
+	}
+}
+private: System::Void dataGridView2_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+}
+	   String^ llenar(String^% artista, String^% cancion, String^% duracion, int fila) {
+		   artista = dynamic_cast<String^>(dataGridView2->Rows[fila]->Cells[0]->Value);
+		   cancion = dynamic_cast<String^>(dataGridView2->Rows[fila]->Cells[1]->Value);
+		   duracion = dynamic_cast<String^>(dataGridView2->Rows[fila]->Cells[2]->Value);
+		   return artista, cancion, duracion;
+	   }
+private: System::Void Reproduccion_BTN_Click(System::Object^ sender, System::EventArgs^ e) {
+	llenar(artista, cancion, duracion, 0);
+	if (artista != nullptr) {
+		String^ reproduccionActual = String::Format("Artista: {0}\nCanción: {1}\nDuración: {2}", artista, cancion, duracion);
+
+		MessageBox::Show(reproduccionActual, "Reproduccion Actual");
+	}
+	else
+	{
+		MessageBox::Show("Reproduccion en pausa");
+	}
+}
+	   
+private: System::Void Siguiente_BTN_Click(System::Object^ sender, System::EventArgs^ e) {
+		dataGridView2->Rows->Add();
+		int filas = dataGridView2->RowCount - 1;
+		
+		dataGridView2->Rows[filas]->Cells[0]->Value = artista;
+		dataGridView2->Rows[filas]->Cells[1]->Value = cancion;
+		dataGridView2->Rows[filas]->Cells[2]->Value = duracion;
+
+		llenar(artista, cancion, duracion, 1);
+
+		String^ reproduccionSiguiente = String::Format("Artista: {0}\nCanción: {1}\nDuración: {2}", artista, cancion, duracion);
+
+		MessageBox::Show(reproduccionSiguiente, "Siguiente Reproduccion");
+
+		dataGridView2->Rows->RemoveAt(0);
+}
+	   bool dir_orden = true;
+	public: System::Void OrdenarDataGridView(String^ clave) {
+
+		DataGridView^ dataGridView = dataGridView2;
+
+		if (dataGridView->Columns->Contains(clave)) {
+			if (dir_orden) {
+				dataGridView->Sort(dataGridView->Columns[clave], System::ComponentModel::ListSortDirection::Ascending);
+			}
+			else {
+				dataGridView->Sort(dataGridView->Columns[clave], System::ComponentModel::ListSortDirection::Descending);
+			}
+		}
+	}
+private: System::Void Ordenar_BTN_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ clave = opciones_ORDEN->SelectedItem->ToString();
+	OrdenarDataGridView(clave);
+	dir_orden = !dir_orden;
+}
 };
 }

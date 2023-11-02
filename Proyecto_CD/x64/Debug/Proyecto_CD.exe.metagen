@@ -19,5 +19,9 @@ Assembly Microsoft.VisualC.STLCLR, Version=2.0.0.0, Culture=neutral, PublicKeyTo
 Class ProyectoCD.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Windows.Forms.DataGridView dataGridView1 : Public
   Methods:
     mostrarAlbum(String): PrivateScope, Public, HideBySig
+    eliminarfilas(Int32): PrivateScope, Public, HideBySig
+    OrdenarDataGridView(String): PrivateScope, Public, HideBySig
